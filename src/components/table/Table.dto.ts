@@ -11,5 +11,5 @@ export type TableProps<T, K extends keyof T> = {
 };
 
 export type TableOptions = {
-  enableSelection: boolean;
+  editHref?: string;
 };

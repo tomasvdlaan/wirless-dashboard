@@ -7,11 +7,14 @@ type TableRowsProps<T, K extends keyof T> = {
 };
 
 function TableBody<T, K extends keyof T>(props: TableRowsProps<T, K>) {
+  const href = (item: any): string =>
+    props.options.editHref?.replace(/\{(.*?)\}/g, (match, key) => item[key]) || "";
+
   return (
     <tbody>
       {props.data.map((item) => (
         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-          {props.options.enableSelection && (
+          {props.options.editHref && (
             <td className="p-4 w-4">
               <div className="flex items-center">
                 <input
@@ -31,7 +34,7 @@ function TableBody<T, K extends keyof T>(props: TableRowsProps<T, K>) {
             </th>
           ))}
           <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-            <a className="text-blue-600 dark:text-blue-500 hover:underline mx-2">
+            <a className="text-blue-600 dark:text-blue-500 hover:underline mx-2" href={href(item)}>
               Edit
             </a>
           </td>
